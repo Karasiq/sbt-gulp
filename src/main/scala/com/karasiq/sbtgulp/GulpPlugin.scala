@@ -23,10 +23,6 @@ object GulpPlugin extends AutoPlugin {
 
   import autoImport._
 
-  override def requires = sbt.plugins.JvmPlugin
-
-  override def trigger = allRequirements
-
   override val projectSettings =
     inConfig(Compile)(baseGulpSettings)
 }
