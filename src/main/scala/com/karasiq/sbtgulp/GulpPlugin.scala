@@ -2,6 +2,7 @@ package com.karasiq.sbtgulp
 
 import sbt.Keys._
 import sbt._
+import sbt.plugins.JvmPlugin
 
 object GulpPlugin extends AutoPlugin {
   object autoImport {
@@ -23,6 +24,7 @@ object GulpPlugin extends AutoPlugin {
 
   import autoImport._
 
-  override val projectSettings =
-    inConfig(Compile)(baseGulpSettings)
+  override def requires: Plugins = JvmPlugin
+
+  override val projectSettings = inConfig(Compile)(baseGulpSettings)
 }
