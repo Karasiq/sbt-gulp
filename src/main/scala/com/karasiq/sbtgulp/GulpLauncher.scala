@@ -12,7 +12,7 @@ import scala.collection.mutable.ListBuffer
 /**
   * SBT helper object for gulp.js
   */
-private[sbtgulp] object Gulp {
+object GulpLauncher {
   /**
     * Checks if current OS is Windows
     * @return Is SBT running on Windows
@@ -60,15 +60,16 @@ private[sbtgulp] object Gulp {
   /**
     * Compiles Gulp.js project
     * @param source Gulp assets directory
+    * @param task Gulp task name
     * @param out Gulp output directory
     * @param dest Output directory
     * @param streams SBT IO streams
     * @return List of produced files
     */
-  def compile(source: File, out: File, dest: File)(implicit streams: TaskStreams[ScopedKey[_]]): Seq[File] = {
+  def compile(source: File, task: String, out: File, dest: File)(implicit streams: TaskStreams[ScopedKey[_]]): Seq[File] = {
     // Launch compilation process
     streams.log.info(s"Compiling gulp assets in ${source.getAbsolutePath}...")
-    val process = Process(Seq(gulpScript(source), "compile"), source.getAbsoluteFile)
+    val process = Process(Seq(gulpScript(source), task), source.getAbsoluteFile)
     assert(process.!< == 0, "Gulp.js project compilation failed")
 
     // Move directory

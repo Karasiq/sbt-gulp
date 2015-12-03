@@ -2,9 +2,9 @@ organization := "com.github.karasiq"
 
 name := "sbt-gulp"
 
-isSnapshot := true
+isSnapshot := false
 
-version := "1.1-SNAPSHOT"
+version := "1.0.1"
 
 scalacOptions ++= Seq("-target:jvm-1.7")
 
