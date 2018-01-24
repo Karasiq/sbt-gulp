@@ -4,7 +4,7 @@ SBT plugin for auto compilation of Gulp.js assets
 # Usage
 In `project/plugins.sbt`:
 ```scala
-addSbtPlugin("com.github.karasiq" % "sbt-gulp" % "1.0.1")
+addSbtPlugin("com.github.karasiq" % "sbt-gulp" % "1.0.2")
 ```
 
 In `build.sbt`:
@@ -27,5 +27,7 @@ gulpDest in Compile := resourceManaged.value / "webapp"
 # Using with Scala.js
 Add dependency in `build.sbt`:
 ```scala
-gulpCompile in Compile <<= (gulpCompile in Compile).dependsOn(fullOptJS in Compile in yourScalaJsProject)
+gulpCompile in Compile := (gulpCompile in Compile)
+  .dependsOn(fullOptJS in Compile in yourScalaJsProject)
+  .value
 ```

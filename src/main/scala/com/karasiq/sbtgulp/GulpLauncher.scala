@@ -4,10 +4,11 @@ import java.io.IOException
 import java.nio.file._
 import java.nio.file.attribute.BasicFileAttributes
 
+import scala.collection.mutable.ListBuffer
+import scala.sys.process.Process
+
 import sbt._
 import sbt.std.TaskStreams
-
-import scala.collection.mutable.ListBuffer
 
 /**
   * SBT helper object for gulp.js

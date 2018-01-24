@@ -2,11 +2,11 @@ organization := "com.github.karasiq"
 
 name := "sbt-gulp"
 
-isSnapshot := false
+version := "1.0.2"
 
-version := "1.0.1"
+isSnapshot := version.value.endsWith("SNAPSHOT")
 
-scalacOptions ++= Seq("-target:jvm-1.7")
+crossSbtVersions := Seq("0.13.16", "1.1.0")
 
 sbtPlugin := true
 
@@ -24,9 +24,9 @@ publishArtifact in Test := false
 
 pomIncludeRepository := { _ ⇒ false }
 
-licenses := Seq("Apache License, Version 2.0" -> url("http://opensource.org/licenses/Apache-2.0"))
+licenses := Seq("Apache License, Version 2.0" → url("http://opensource.org/licenses/Apache-2.0"))
 
-homepage := Some(url("https://github.com/Karasiq/" + name.value))
+homepage := Some(url(s"https://github.com/Karasiq/${name.value}"))
 
 pomExtra := <scm>
   <url>git@github.com:Karasiq/{name.value}.git</url>

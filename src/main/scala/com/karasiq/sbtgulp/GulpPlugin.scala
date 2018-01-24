@@ -1,7 +1,7 @@
 package com.karasiq.sbtgulp
 
+import sbt.{Def, _}
 import sbt.Keys._
-import sbt._
 import sbt.plugins.JvmPlugin
 
 object GulpPlugin extends AutoPlugin {
@@ -17,8 +17,8 @@ object GulpPlugin extends AutoPlugin {
       gulpTask := "compile",
       gulpOutput := gulpAssets.value / "out",
       gulpDest := resourceManaged.value / "webapp",
-      gulpCompile <<= (gulpAssets, gulpTask, gulpOutput, gulpDest, streams).map { (src, task, out, dest, streams) ⇒
-        GulpLauncher.compile(src, task, out, dest)(streams)
+      gulpCompile := {
+        GulpLauncher.compile(gulpAssets.value, gulpTask.value, gulpOutput.value, gulpDest.value)(streams.value)
       },
       managedResources ++= gulpCompile.value
     )
@@ -28,5 +28,5 @@ object GulpPlugin extends AutoPlugin {
 
   override def requires: Plugins = JvmPlugin
 
-  override val projectSettings = inConfig(Compile)(baseGulpSettings)
+  override val projectSettings: Seq[Def.Setting[_]] = inConfig(Compile)(baseGulpSettings)
 }
